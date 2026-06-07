@@ -9,7 +9,7 @@ import Image from "next/image";
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: "easeOut" },
+  transition: { duration: 0.6, delay, ease: "easeOut" as const },
 });
 
 export default function HeroSection() {
@@ -40,7 +40,7 @@ export default function HeroSection() {
         className="absolute right-[22%] top-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full border border-amber-100 opacity-50 pointer-events-none"
       />
 
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center gap-6 py-6">
+      <div className="relative z-20 w-full container mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center gap-6 py-16">
         {/* ── LEFT: Copy ── */}
         <div className="flex-1">
           {/* Badge */}
