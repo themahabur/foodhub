@@ -4,19 +4,29 @@ import { Menu, MapPin, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
-  Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import {
-  DropdownMenu, DropdownMenuContent,
-  DropdownMenuItem, DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 import { NavbarProps } from "@/types/navbar.types";
 import {
-  IS_LOGGED_IN, CURRENT_ROLE, roleMenus,
-  DEFAULT_MENU, DEFAULT_CITIES, DEFAULT_LOGO,
+  IS_LOGGED_IN,
+  CURRENT_ROLE,
+  roleMenus,
+  DEFAULT_MENU,
+  DEFAULT_CITIES,
+  DEFAULT_LOGO,
 } from "@/data/navbar.data";
 import { ProfileSidebar } from "../sidebar/profile-sidebar";
 
@@ -38,7 +48,6 @@ const Navbar = ({
 
       <div className="border-b border-gray-100/80 bg-white/95 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-3.5">
-
           {/* Desktop */}
           <nav className="hidden items-center justify-between lg:flex">
             <Link href={logo.url} className="flex items-center gap-2.5 group">
@@ -86,7 +95,8 @@ const Navbar = ({
                           onClick={() => setSelectedCity(city)}
                           className={cn(
                             "text-sm cursor-pointer",
-                            selectedCity === city && "font-semibold text-foodhub-maroon",
+                            selectedCity === city &&
+                              "font-semibold text-foodhub-maroon",
                           )}
                         >
                           {city}
@@ -94,14 +104,23 @@ const Navbar = ({
                       ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
-                  <ProfileSidebar role={CURRENT_ROLE} menuItems={profileMenuItems} />
+                  <ProfileSidebar
+                    role={CURRENT_ROLE}
+                    menuItems={profileMenuItems}
+                  />
                 </>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Link href="/login" className="px-5 py-2 text-sm font-semibold text-foodhub-maroon rounded-full border border-foodhub-maroon/25 hover:border-foodhub-maroon hover:bg-foodhub-maroon/5 transition-all duration-200 tracking-wide">
+                  <Link
+                    href="/login"
+                    className="px-5 py-2 text-sm font-semibold text-foodhub-maroon rounded-full border border-foodhub-maroon/25 hover:border-foodhub-maroon hover:bg-foodhub-maroon/5 transition-all duration-200 tracking-wide"
+                  >
                     Login
                   </Link>
-                  <Link href="/register" className="px-5 py-2 text-sm font-semibold text-white rounded-full bg-foodhub-maroon shadow-[0_2px_12px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_4px_20px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 tracking-wide">
+                  <Link
+                    href="/register"
+                    className="px-5 py-2 text-sm font-semibold text-white rounded-full bg-foodhub-maroon shadow-[0_2px_12px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_4px_20px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 tracking-wide"
+                  >
                     Sign up
                   </Link>
                 </div>
@@ -145,11 +164,18 @@ const Navbar = ({
               )}
 
               {IS_LOGGED_IN ? (
-                <ProfileSidebar role={CURRENT_ROLE} menuItems={profileMenuItems} />
+                <ProfileSidebar
+                  role={CURRENT_ROLE}
+                  menuItems={profileMenuItems}
+                />
               ) : (
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="outline" size="icon" className="rounded-xl border-gray-200">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="rounded-xl border-gray-200"
+                    >
                       <Menu className="size-4" />
                     </Button>
                   </SheetTrigger>
@@ -180,10 +206,16 @@ const Navbar = ({
                         ))}
                       </div>
                       <div className="flex flex-col gap-3 pt-2">
-                        <Link href="/login" className="w-full text-center px-5 py-2.5 text-sm font-semibold text-foodhub-maroon rounded-full border border-foodhub-maroon/30 hover:border-foodhub-maroon hover:bg-foodhub-maroon/5 transition-all duration-200 tracking-wide">
+                        <Link
+                          href="/login"
+                          className="w-full text-center px-5 py-2.5 text-sm font-semibold text-foodhub-maroon rounded-full border border-foodhub-maroon/30 hover:border-foodhub-maroon hover:bg-foodhub-maroon/5 transition-all duration-200 tracking-wide"
+                        >
                           Login
                         </Link>
-                        <Link href="/register" className="w-full text-center px-5 py-2.5 text-sm font-semibold text-white rounded-full bg-foodhub-maroon shadow-[0_2px_12px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_4px_20px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 tracking-wide">
+                        <Link
+                          href="/register"
+                          className="w-full text-center px-5 py-2.5 text-sm font-semibold text-white rounded-full bg-foodhub-maroon shadow-[0_2px_12px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_4px_20px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 tracking-wide"
+                        >
                           Sign up
                         </Link>
                       </div>
@@ -193,7 +225,6 @@ const Navbar = ({
               )}
             </div>
           </div>
-
         </div>
       </div>
     </section>

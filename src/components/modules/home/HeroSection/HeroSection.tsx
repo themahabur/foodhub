@@ -1,114 +1,265 @@
-import { ArrowRight } from "lucide-react";
-import React from "react";
+"use client";
 
-const HeroSection = () => {
+import { useState } from "react";
+import { Search, MapPin, ChevronDown, ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+import { DEFAULT_CITIES, floatingFoods } from "@/data/navbar.data";
+import Image from "next/image";
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: "easeOut" },
+});
+
+export default function HeroSection() {
+  const [query, setQuery] = useState("");
+  const [city, setCity] = useState("Kolkata");
+  const [cityOpen, setCityOpen] = useState(false);
+
   return (
-    <section className=" flex items-center py-20 bg-white">
-      <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-14 items-center">
+    <section className="relative w-full flex items-center bg-white">
+      {/* Soft radial gradient background — right side */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute right-0 top-0 w-[60%] h-full"
+          style={{
+            background:
+              "radial-gradient(ellipse 80% 60% at 80% 50%, #fce8e8 0%, #fff5e6 50%, transparent 80%)",
+          }}
+        />
+      </div>
 
-        {/* LEFT CONTENT */}
-        <div>
-          {/* Heading */}
-          <h1 className="text-4xl lg:text-6xl font-extrabold leading-16 text-gray-900">
+      {/* Decorative rings */}
+      <div
+        aria-hidden="true"
+        className="absolute right-[18%] top-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full border border-red-100 opacity-60 pointer-events-none"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute right-[22%] top-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full border border-amber-100 opacity-50 pointer-events-none"
+      />
+
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center gap-6 py-6">
+        {/* ── LEFT: Copy ── */}
+        <div className="flex-1">
+          {/* Badge */}
+          <motion.span
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-foodhub-maroon bg-red-50 border border-red-100 px-3 py-1 rounded-full mb-6"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-foodhub-maroon animate-pulse" />
+            Free delivery on first order
+          </motion.span>
+
+          {/* Headline */}
+          <motion.h1
+            {...fadeUp(0.1)}
+            className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-gray-900 mb-3"
+          >
             Discover Flavors
             <br />
             That Make
-            <br />
-            <span className="text-foodhub-yellow">You Smile</span>
-          </h1>
+          </motion.h1>
+          <motion.h1
+            {...fadeUp(0.2)}
+            className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-[#E8A020] mb-6"
+          >
+            You Smile
+          </motion.h1>
 
-          {/* Description */}
-          <p className="mt-4 max-w-xl text-lg leading-8 text-gray-500">
-            Explore handcrafted meals from trusted local providers and enjoy
-            fresh delivery straight to your doorstep.
-          </p>
+          {/* Sub-copy */}
+          <motion.p
+            {...fadeUp(0.3)}
+            className="text-gray-500 text-lg leading-relaxed mb-10 max-w-md"
+          >
+            Explore meals from top local providers and enjoy
+            <br className="hidden sm:block" />
+            delivery to your door.
+          </motion.p>
 
-          {/* SEARCH BAR */}
-          <div className="mt-8 flex items-center overflow-hidden rounded-full border border-gray-200 bg-white shadow-[0_10px_40px_rgba(0,0,0,0.06)] max-w-2xl">
+          {/* Search bar */}
+          <motion.div {...fadeUp(0.4)} className="relative mb-6">
+            <div className="flex items-stretch bg-white border border-gray-200 rounded-full shadow-[0_4px_24px_0_rgba(0,0,0,0.08)]">
+              {/* Search icon */}
+              <div className="flex items-center pl-4 pr-2 text-gray-400">
+                <Search size={18} strokeWidth={2} />
+              </div>
 
-            <input
-              type="text"
-              placeholder="Search meals, cuisines or restaurants..."
-              className="flex-1 px-6 py-5 bg-transparent outline-none text-gray-700 placeholder:text-gray-400"
-            />
-
-            <div className="h-8 w-px bg-gray-200" />
-
-            <select className="px-5 py-5 bg-transparent outline-none text-gray-600">
-              <option>Dhaka</option>
-            </select>
-
-            <button className="mr-2 px-8 py-3 text-sm font-semibold text-white rounded-full bg-foodhub-maroon shadow-[0_4px_20px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_8px_30px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.03] transition-all duration-300">
-              Search
-            </button>
-          </div>
-
-          {/* CTA BUTTONS */}
-          <div className="mt-10 flex flex-wrap gap-4">
-            
-            {/* Primary CTA */}
-            <button className="group px-8 py-4 text-base font-semibold text-white rounded-full bg-foodhub-maroon shadow-[0_4px_20px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_8px_30px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.03] transition-all duration-300 flex items-center gap-2">
-              Order Now
-
-              <ArrowRight
-                size={18}
-                className="transition-transform duration-300 group-hover:translate-x-1"
+              {/* Input */}
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search for meals, cuisines or providers..."
+                className="flex-1 py-3.5 text-sm text-gray-700 placeholder-gray-400 bg-transparent outline-none min-w-0"
               />
-            </button>
 
-            {/* Secondary CTA */}
-            <button className="px-8 py-4 text-base font-semibold text-foodhub-maroon rounded-full border border-foodhub-maroon/25 hover:border-foodhub-maroon hover:bg-foodhub-maroon/5 transition-all duration-300">
+              {/* City picker */}
+              <div className="relative flex items-center border-l border-gray-100 px-3">
+                <button
+                  onClick={() => setCityOpen(!cityOpen)}
+                  className="flex items-center gap-1 text-sm text-gray-600 hover:text-foodhub-maroon transition-colors py-1 whitespace-nowrap"
+                >
+                  <MapPin size={14} className="text-foodhub-maroon" />
+                  {city}
+                  <ChevronDown
+                    size={13}
+                    className={`transition-transform duration-200 ${cityOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {/* Dropdown — rendered outside overflow container */}
+                {cityOpen && (
+                  <>
+                    {/* Backdrop to close on outside click */}
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setCityOpen(false)}
+                    />
+                    <div className="absolute top-full right-0 w-36 bg-white rounded-xl shadow-xl border border-gray-100 py-1 z-50">
+                      {DEFAULT_CITIES.map((c) => (
+                        <button
+                          key={c}
+                          onClick={() => {
+                            setCity(c);
+                            setCityOpen(false);
+                          }}
+                          className={`w-full text-left text-sm px-4 py-2 hover:bg-red-50 transition-colors ${
+                            c === city
+                              ? "text-foodhub-maroon font-medium"
+                              : "text-gray-600"
+                          }`}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Search button */}
+              <button className="cursor-pointer bg-foodhub-maroon shadow-[0_2px_12px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_4px_20px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 tracking-wide text-white text-sm font-semibold px-6 rounded-full m-1.5">
+                Search
+              </button>
+            </div>
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            {...fadeUp(0.5)}
+            className="flex flex-wrap items-center gap-4"
+          >
+            <button className="cursor-pointer inline-flex items-center gap-2 text-white font-semibold text-sm px-7 py-3.5 rounded-full bg-foodhub-maroon shadow-[0_2px_12px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_4px_20px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 tracking-wide">
+              Order Now
+              <ArrowRight size={16} strokeWidth={2.5} />
+            </button>
+            <button className="cursor-pointer inline-flex items-center gap-2 text-foodhub-maroon border border-foodhub-maroon/25 hover:border-foodhub-maroon hover:bg-foodhub-maroon/5 duration-200 tracking-wide font-semibold text-sm px-7 py-3.5 rounded-full transition-all">
               Become a Provider
             </button>
-          </div>
+          </motion.div>
         </div>
 
-        {/* RIGHT CONTENT */}
-        <div className="relative h-[600px] hidden lg:block">
+        {/* ── RIGHT: Floating food images ── */}
+        <div className="flex-1 relative min-h-105 hidden lg:block">
+          {floatingFoods.map((food) => (
+            <motion.div
+              key={food.id}
+              className={`absolute ${food.position} ${food.size} ${food.rotate} ${food.zIndex}`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: [0, -12, 0],
+              }}
+              transition={{
+                opacity: { duration: 0.5, delay: parseFloat(food.delay) },
+                scale: { duration: 0.5, delay: parseFloat(food.delay) },
+                y: {
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: parseFloat(food.delay),
+                },
+              }}
+            >
+              <div
+                className={`w-full h-full ${food.shape} bg-white shadow-[0_8px_32px_0_rgba(0,0,0,0.10)] overflow-hidden flex items-center justify-center p-3`}
+              >
+                <Image
+                  width={200}
+                  height={200}
+                  src={food.src}
+                  alt={food.alt}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const colors: Record<string, string> = {
+                      Burger: "from-amber-100 to-orange-100",
+                      "Salad Bowl": "from-green-100 to-teal-100",
+                      Pizza: "from-red-100 to-orange-100",
+                      Drink: "from-pink-100 to-red-100",
+                    };
+                    (e.target as HTMLImageElement).style.display = "none";
+                    const parent = (e.target as HTMLImageElement).parentElement;
+                    if (parent) {
+                      parent.innerHTML = `<div class="w-full h-full flex items-center justify-center text-4xl bg-gradient-to-br ${
+                        colors[food.alt] ?? "from-gray-100 to-gray-200"
+                      } rounded-xl">${
+                        food.alt === "Burger"
+                          ? "🍔"
+                          : food.alt === "Salad Bowl"
+                            ? "🥗"
+                            : food.alt === "Pizza"
+                              ? "🍕"
+                              : "🥤"
+                      }</div>`;
+                    }
+                  }}
+                />
+              </div>
+            </motion.div>
+          ))}
 
-          {/* PREMIUM GLOW */}
-          <div className="absolute top-20 left-20 h-72 w-72 rounded-full bg-foodhub-yellow/20 blur-[120px]" />
-          <div className="absolute bottom-20 right-20 h-72 w-72 rounded-full bg-foodhub-maroon/10 blur-[120px]" />
+          {/* Floating badge — delivery time */}
+          <motion.div
+            {...fadeUp(1.4)}
+            className="absolute top-24 left-40 z-20 bg-white rounded-2xl shadow-lg px-4 py-2.5 flex items-center gap-2.5 border border-gray-50"
+          >
+            <div className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-lg">
+              ⏱
+            </div>
+            <div>
+              <p className="text-xs text-gray-400 leading-none mb-0.5">
+                Avg. delivery
+              </p>
+              <p className="text-sm font-bold text-gray-800 leading-none">
+                25 min
+              </p>
+            </div>
+          </motion.div>
 
-          {/* Burger */}
-          <div className="absolute top-10 left-16 bg-white rounded-[32px] shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-6 rotate-[-6deg]">
-            <img
-              src="https://foodhub-flavorfinder.lovable.app/assets/hero-burger-BLklTCT1.png"
-              alt="burger"
-              className="w-32 h-32 object-contain"
-            />
-          </div>
-
-          {/* Rice */}
-          <div className="absolute top-0 right-10">
-            <img
-              src="https://foodhub-flavorfinder.lovable.app/assets/hero-bowl-77uF6LbK.png"
-              alt="rice"
-              className="w-48 h-48 rounded-full bg-white p-2 shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
-            />
-          </div>
-
-          {/* Pizza */}
-          <div className="absolute bottom-12 left-20">
-            <img
-              src="https://foodhub-flavorfinder.lovable.app/assets/hero-pizza-Bv3DcA3F.png"
-              alt="pizza"
-              className="w-56 h-56 rounded-full bg-white p-2 shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
-            />
-          </div>
-
-          {/* Drink */}
-          <div className="absolute bottom-10 right-10 bg-white rounded-[32px] shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-6 rotate-[-6deg]">
-            <img
-              src="https://foodhub-flavorfinder.lovable.app/assets/hero-drink-gHSrV030.png"
-              alt="drink"
-              className="w-24 h-40 object-contain"
-            />
-          </div>
+          {/* Floating badge — orders today */}
+          <motion.div
+            {...fadeUp(1.6)}
+            className="absolute bottom-2 right-2 z-20 bg-white rounded-2xl shadow-lg px-4 py-2.5 flex items-center gap-2.5 border border-gray-50"
+          >
+            <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-lg">
+              🔥
+            </div>
+            <div>
+              <p className="text-xs text-gray-400 leading-none mb-0.5">
+                Orders today
+              </p>
+              <p className="text-sm font-bold text-gray-800 leading-none">
+                12,430+
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
-};
-
-export default HeroSection;
+}
