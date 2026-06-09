@@ -1,11 +1,7 @@
-import React from 'react';
 
-const page = () => {
-    return (
-        <div className="flex items-center justify-center h-screen">
-            <h1>Explore Page</h1>
-        </div>
-    );
-};
+import MealsClient from "@/components/modules/meals/MealsClient";
+import { MEALS } from "@/data/meals.data";
 
-export default page;
+export default function MealsPage() {
+  return <MealsClient meals={MEALS} />;
+}

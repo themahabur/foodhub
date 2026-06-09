@@ -12,7 +12,7 @@ import {
   Flag,
 } from "lucide-react";
 
-export const IS_LOGGED_IN: boolean = false;
+export const IS_LOGGED_IN: boolean = true; // ✅ Login state change করে test করো
 
 // ✅ Role change করে test করো
 export const CURRENT_ROLE: Role = "customer";
@@ -168,5 +168,68 @@ export const categories = [
     iconBg: "bg-pink-100",
     color: "text-pink-500",
     href: "/category/desserts",
+  },
+];
+
+export const meals = [
+  {
+    id: 1,
+    name: "Farmhouse Pizza",
+    restaurant: "La Pizzeria",
+    rating: 4.6,
+    price: 349,
+    image: "/meal-pizza.jpg",
+    href: "/meals/farmhouse-pizza",
+  },
+  {
+    id: 2,
+    name: "Classic Chicken Burger",
+    restaurant: "Burger House",
+    rating: 4.5,
+    price: 189,
+    image: "/meal-burger.jpg",
+    href: "/meals/classic-chicken-burger",
+  },
+  {
+    id: 3,
+    name: "Hyderabadi Biryani",
+    restaurant: "Biryani Darbar",
+    rating: 4.7,
+    price: 299,
+    image: "/meal-biryani.jpg",
+    href: "/meals/hyderabadi-biryani",
+  },
+  {
+    id: 4,
+    name: "Thai Basil Noodles",
+    restaurant: "Wok Express",
+    rating: 4.4,
+    price: 249,
+    image: "/meal-noodles.jpg",
+    href: "/meals/thai-basil-noodles",
+  },
+];
+
+export const reviews = [
+  {
+    id: 1,
+    rating: 5,
+    text: "FoodHub has totally changed my weeknights. The biryani arrives piping hot and the app is so easy to use!",
+    name: "Ananya S.",
+    avatar: "/images/avatars/ananya.jpg",
+  },
+  {
+    id: 2,
+    rating: 5,
+    text: "Loved the variety of providers — from Bengali thalis to Thai noodles. Delivery is always on time.",
+    name: "Rohit D.",
+    avatar: "/images/avatars/rohit.jpg",
+  },
+  {
+    id: 3,
+    rating: 4,
+    text: "The discounts are real and the food quality is consistently great. My go-to app for ordering in.",
+    name: "Megha T.",
+    avatar: "/images/avatars/megha.jpg",
   },
 ];

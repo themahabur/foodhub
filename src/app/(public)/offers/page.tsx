@@ -1,11 +1,7 @@
-import React from 'react';
 
-const offersPage = () => {
-    return (
-        <div className="flex items-center justify-center h-screen">
-            <h1 className="text-2xl font-bold">Offers Page</h1>
-        </div>
-    );
-};
+import OffersClient from "@/components/modules/offers/OffersClient";
+import { OFFERS } from "@/data/offers.data";
 
-export default offersPage;
+export default function OffersPage() {
+  return <OffersClient offers={OFFERS} />;
+}

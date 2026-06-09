@@ -2,15 +2,10 @@
 
 import { useState } from "react";
 import { Search, MapPin, ChevronDown, ArrowRight } from "lucide-react";
-import { motion } from "motion/react";
 import { DEFAULT_CITIES, floatingFoods } from "@/data/navbar.data";
 import Image from "next/image";
+import { FadeDown, FadeUp, FloatUpDown } from "@/components/shared/motion/motion-wrapper";
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: "easeOut" as const },
-});
 
 export default function HeroSection() {
   const [query, setQuery] = useState("");
@@ -44,51 +39,43 @@ export default function HeroSection() {
         {/* ── LEFT: Copy ── */}
         <div className="flex-1">
           {/* Badge */}
-          <motion.span
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-foodhub-maroon bg-red-50 border border-red-100 px-3 py-1 rounded-full mb-6"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-foodhub-maroon animate-pulse" />
-            Free delivery on first order
-          </motion.span>
+          <FadeDown>
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-foodhub-maroon bg-red-50 border border-red-100 px-3 py-1 rounded-full mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-foodhub-maroon animate-pulse" />
+              Free delivery on first order
+            </span>
+          </FadeDown>
 
           {/* Headline */}
-          <motion.h1
-            {...fadeUp(0.1)}
-            className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-gray-900 mb-3"
-          >
-            Discover Flavors
-            <br />
-            That Make
-          </motion.h1>
-          <motion.h1
-            {...fadeUp(0.2)}
-            className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-[#E8A020] mb-6"
-          >
-            You Smile
-          </motion.h1>
+          <FadeUp delay={0.1}>
+            <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-gray-900 mb-3">
+              Discover Flavors
+              <br />
+              That Make
+            </h1>
+          </FadeUp>
+          <FadeUp delay={0.2}>
+            <h1 className="text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-[#E8A020] mb-6">
+              You Smile
+            </h1>
+          </FadeUp>
 
           {/* Sub-copy */}
-          <motion.p
-            {...fadeUp(0.3)}
-            className="text-gray-500 text-lg leading-relaxed mb-10 max-w-md"
-          >
-            Explore meals from top local providers and enjoy
-            <br className="hidden sm:block" />
-            delivery to your door.
-          </motion.p>
+          <FadeUp delay={0.3}>
+            <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-md">
+              Explore meals from top local providers and enjoy
+              <br className="hidden sm:block" />
+              delivery to your door.
+            </p>
+          </FadeUp>
 
           {/* Search bar */}
-          <motion.div {...fadeUp(0.4)} className="relative mb-6">
+          <FadeUp delay={0.4} className="relative mb-6">
             <div className="flex items-stretch bg-white border border-gray-200 rounded-full shadow-[0_4px_24px_0_rgba(0,0,0,0.08)]">
-              {/* Search icon */}
               <div className="flex items-center pl-4 pr-2 text-gray-400">
                 <Search size={18} strokeWidth={2} />
               </div>
 
-              {/* Input */}
               <input
                 type="text"
                 value={query}
@@ -97,7 +84,6 @@ export default function HeroSection() {
                 className="flex-1 py-3.5 text-sm text-gray-700 placeholder-gray-400 bg-transparent outline-none min-w-0"
               />
 
-              {/* City picker */}
               <div className="relative flex items-center border-l border-gray-100 px-3">
                 <button
                   onClick={() => setCityOpen(!cityOpen)}
@@ -111,10 +97,8 @@ export default function HeroSection() {
                   />
                 </button>
 
-                {/* Dropdown — rendered outside overflow container */}
                 {cityOpen && (
                   <>
-                    {/* Backdrop to close on outside click */}
                     <div
                       className="fixed inset-0 z-40"
                       onClick={() => setCityOpen(false)}
@@ -141,18 +125,14 @@ export default function HeroSection() {
                 )}
               </div>
 
-              {/* Search button */}
               <button className="cursor-pointer bg-foodhub-maroon shadow-[0_2px_12px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_4px_20px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 tracking-wide text-white text-sm font-semibold px-6 rounded-full m-1.5">
                 Search
               </button>
             </div>
-          </motion.div>
+          </FadeUp>
 
           {/* CTAs */}
-          <motion.div
-            {...fadeUp(0.5)}
-            className="flex flex-wrap items-center gap-4"
-          >
+          <FadeUp delay={0.5} className="flex flex-wrap items-center gap-4">
             <button className="cursor-pointer inline-flex items-center gap-2 text-white font-semibold text-sm px-7 py-3.5 rounded-full bg-foodhub-maroon shadow-[0_2px_12px_theme(colors.foodhub-maroon/35%)] hover:shadow-[0_4px_20px_theme(colors.foodhub-maroon/50%)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 tracking-wide">
               Order Now
               <ArrowRight size={16} strokeWidth={2.5} />
@@ -160,31 +140,16 @@ export default function HeroSection() {
             <button className="cursor-pointer inline-flex items-center gap-2 text-foodhub-maroon border border-foodhub-maroon/25 hover:border-foodhub-maroon hover:bg-foodhub-maroon/5 duration-200 tracking-wide font-semibold text-sm px-7 py-3.5 rounded-full transition-all">
               Become a Provider
             </button>
-          </motion.div>
+          </FadeUp>
         </div>
 
         {/* ── RIGHT: Floating food images ── */}
         <div className="flex-1 relative min-h-105 hidden lg:block">
           {floatingFoods.map((food) => (
-            <motion.div
+            <FloatUpDown
               key={food.id}
+              delay={parseFloat(food.delay)}
               className={`absolute ${food.position} ${food.size} ${food.rotate} ${food.zIndex}`}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                y: [0, -12, 0],
-              }}
-              transition={{
-                opacity: { duration: 0.5, delay: parseFloat(food.delay) },
-                scale: { duration: 0.5, delay: parseFloat(food.delay) },
-                y: {
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: parseFloat(food.delay),
-                },
-              }}
             >
               <div
                 className={`w-full h-full ${food.shape} bg-white shadow-[0_8px_32px_0_rgba(0,0,0,0.10)] overflow-hidden flex items-center justify-center p-3`}
@@ -220,12 +185,12 @@ export default function HeroSection() {
                   }}
                 />
               </div>
-            </motion.div>
+            </FloatUpDown>
           ))}
 
           {/* Floating badge — delivery time */}
-          <motion.div
-            {...fadeUp(1.4)}
+          <FadeUp
+            delay={1.4}
             className="absolute top-24 left-40 z-20 bg-white rounded-2xl shadow-lg px-4 py-2.5 flex items-center gap-2.5 border border-gray-50"
           >
             <div className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-lg">
@@ -239,11 +204,11 @@ export default function HeroSection() {
                 25 min
               </p>
             </div>
-          </motion.div>
+          </FadeUp>
 
           {/* Floating badge — orders today */}
-          <motion.div
-            {...fadeUp(1.6)}
+          <FadeUp
+            delay={1.6}
             className="absolute bottom-2 right-2 z-20 bg-white rounded-2xl shadow-lg px-4 py-2.5 flex items-center gap-2.5 border border-gray-50"
           >
             <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-lg">
@@ -257,7 +222,7 @@ export default function HeroSection() {
                 12,430+
               </p>
             </div>
-          </motion.div>
+          </FadeUp>
         </div>
       </div>
     </section>

@@ -1,0 +1,192 @@
+import type { Offer, OfferSortValue } from "@/types/offer.types";
+
+export const OFFERS: Offer[] = [
+  {
+    id: 1,
+    code: "FOODHUB20",
+    title: "20% Off First Order",
+    description:
+      "Get 20% off on your very first order. Valid for all restaurants.",
+    discount: "20%",
+    discountType: "percent",
+    minOrder: 100,
+    maxDiscount: 150,
+    validUntil: "30 Jun 2026",
+    category: "All",
+    tag: "Hot",
+    color: {
+      bg: "bg-foodhub-maroon",
+      accent: "text-white",
+      badge: "bg-white/20 text-white",
+    },
+    emoji: "🎉",
+  },
+  {
+    id: 2,
+    code: "BIRYANI50",
+    title: "৳50 Off on Biryani",
+    description: "Flat ৳50 off on all biryani orders from Biryani Darbar.",
+    discount: "৳50",
+    discountType: "flat",
+    minOrder: 200,
+    validUntil: "15 Jun 2026",
+    category: "Bengali",
+    restaurant: "Biryani Darbar",
+    tag: "Limited",
+    color: {
+      bg: "bg-amber-500",
+      accent: "text-white",
+      badge: "bg-white/20 text-white",
+    },
+    emoji: "🍛",
+  },
+  {
+    id: 3,
+    code: "PIZZA30",
+    title: "30% Off on Pizzas",
+    description:
+      "Order any pizza from La Pizzeria and get 30% off. No minimum order.",
+    discount: "30%",
+    discountType: "percent",
+    minOrder: 0,
+    maxDiscount: 120,
+    validUntil: "20 Jun 2026",
+    category: "Pizza",
+    restaurant: "La Pizzeria",
+    tag: "New",
+    color: {
+      bg: "bg-red-500",
+      accent: "text-white",
+      badge: "bg-white/20 text-white",
+    },
+    emoji: "🍕",
+  },
+  {
+    id: 4,
+    code: "HEALTHY15",
+    title: "15% Off Healthy Meals",
+    description: "Stay healthy and save! 15% off on all healthy bowls.",
+    discount: "15%",
+    discountType: "percent",
+    minOrder: 150,
+    validUntil: "25 Jun 2026",
+    category: "Healthy",
+    restaurant: "Healthy Bowl Co.",
+    tag: "Exclusive",
+    color: {
+      bg: "bg-green-500",
+      accent: "text-white",
+      badge: "bg-white/20 text-white",
+    },
+    emoji: "🥗",
+  },
+  {
+    id: 5,
+    code: "BURGER40",
+    title: "৳40 Off Burgers",
+    description: "Flat ৳40 off on all burgers at Burger House.",
+    discount: "৳40",
+    discountType: "flat",
+    minOrder: 180,
+    validUntil: "22 Jun 2026",
+    category: "Burger",
+    restaurant: "Burger House",
+    tag: "Hot",
+    color: {
+      bg: "bg-orange-500",
+      accent: "text-white",
+      badge: "bg-white/20 text-white",
+    },
+    emoji: "🍔",
+  },
+  {
+    id: 6,
+    code: "ASIAN25",
+    title: "25% Off Asian Cuisine",
+    description: "Craving noodles or ramen? Get 25% off at Wok Express.",
+    discount: "25%",
+    discountType: "percent",
+    minOrder: 120,
+    maxDiscount: 100,
+    validUntil: "18 Jun 2026",
+    category: "Asian",
+    restaurant: "Wok Express",
+    tag: "New",
+    color: {
+      bg: "bg-rose-500",
+      accent: "text-white",
+      badge: "bg-white/20 text-white",
+    },
+    emoji: "🍜",
+  },
+  {
+    id: 7,
+    code: "FREEDEL",
+    title: "Free Delivery",
+    description: "Free delivery on all orders above ৳150.",
+    discount: "Free",
+    discountType: "flat",
+    minOrder: 150,
+    validUntil: "30 Jun 2026",
+    category: "All",
+    tag: "Exclusive",
+    color: {
+      bg: "bg-purple-500",
+      accent: "text-white",
+      badge: "bg-white/20 text-white",
+    },
+    emoji: "🚀",
+  },
+  {
+    id: 8,
+    code: "WEEKEND10",
+    title: "Weekend Special 10%",
+    description: "Every Saturday and Sunday — 10% off on all orders.",
+    discount: "10%",
+    discountType: "percent",
+    minOrder: 100,
+    validUntil: "Every Weekend",
+    category: "All",
+    tag: "Limited",
+    color: {
+      bg: "bg-teal-500",
+      accent: "text-white",
+      badge: "bg-white/20 text-white",
+    },
+    emoji: "🎊",
+  },
+];
+
+export const OFFER_CATEGORIES = [
+  "All",
+  "Pizza",
+  "Burger",
+  "Bengali",
+  "Asian",
+  "Healthy",
+];
+
+export const OFFER_TAGS = [
+  "All Tags",
+  "Hot",
+  "New",
+  "Exclusive",
+  "Limited",
+];
+
+export const OFFER_SORT_OPTIONS: {
+  label: string;
+  value: OfferSortValue;
+}[] = [
+  { label: "Default", value: "default" },
+  { label: "Highest Offer", value: "discount" },
+  { label: "Expiring Soon", value: "expiry" },
+  { label: "Min Order ↑", value: "minorder" },
+];
+
+export const OFFER_TAG_STYLES: Record<string, string> = {
+  Hot: "bg-red-50 text-red-600 border-red-200",
+  New: "bg-green-50 text-green-600 border-green-200",
+  Exclusive: "bg-purple-50 text-purple-600 border-purple-200",
+  Limited: "bg-amber-50 text-amber-600 border-amber-200",
+};

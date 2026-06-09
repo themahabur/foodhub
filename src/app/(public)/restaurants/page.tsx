@@ -1,11 +1,7 @@
 
+import RestaurantsClient from "@/components/modules/restaurant/RestaurantsClient";
+import { RESTAURANTS } from "@/data/restaurants.data";
 
-const restaurantsPage = () => {
-    return (
-        <div className="flex items-center justify-center h-screen">
-            <h1 className="text-2xl font-bold">Restaurants Page</h1>
-        </div>
-    );
-};
-
-export default restaurantsPage;
+export default function RestaurantsPage() {
+  return <RestaurantsClient restaurants={RESTAURANTS} />;
+}
