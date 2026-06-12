@@ -6,7 +6,6 @@ import { Search, SlidersHorizontal, X } from "lucide-react";
 import type { Meal, SortValue } from "@/types/meal.types";
 import { CATEGORIES, SORT_OPTIONS } from "@/data/meals.data";
 
-
 import {
   FadeUpOnScroll,
   StaggerContainer,
@@ -58,7 +57,7 @@ export default function MealsClient({ meals }: MealsClientProps) {
 
     if (sort === "delivery") {
       return [...searchedMeals].sort(
-        (a, b) => parseInt(a.deliveryTime) - parseInt(b.deliveryTime)
+        (a, b) => parseInt(a.deliveryTime) - parseInt(b.deliveryTime),
       );
     }
 
@@ -81,49 +80,54 @@ export default function MealsClient({ meals }: MealsClientProps) {
 
   return (
     <main className="bg-foodhub-maroon/5">
-
       <section className="container mx-auto px-4 py-6 md:px-8">
-        <FadeUpOnScroll className="mt-4 mb-6 rounded-3xl border border-white/70 bg-white p-4 shadow-sm  shadow-foodhub-maroon/10">
-          <div className="flex flex-col gap-3 md:flex-row">
-            <div className="flex flex-1 items-center gap-2 rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3">
-              <Search className="size-4 shrink-0 text-gray-400" />
+        <FadeUpOnScroll className="mt-5 mb-7 rounded-[28px] border border-foodhub-maroon/10 bg-white/90 p-3 ">
+          <div className="flex items-center gap-3">
+            {/* Search Box */}
+            <div className="group flex min-h-[54px] flex-1 items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50/80 px-4 transition-all duration-300 focus-within:border-foodhub-maroon/40 focus-within:bg-white ">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-gray-400 shadow-sm transition group-focus-within:bg-foodhub-maroon group-focus-within:text-white">
+                <Search className="size-4" />
+              </div>
 
               <input
                 type="text"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search meals or restaurants..."
-                className="w-full bg-transparent text-sm text-gray-700 outline-none placeholder:text-gray-400"
+                placeholder="Search meals..."
+                className="w-full bg-transparent text-sm font-medium text-gray-700 outline-none placeholder:font-normal placeholder:text-gray-400"
               />
 
               {query && (
                 <button
                   type="button"
                   onClick={() => setQuery("")}
-                  className="text-gray-400 transition hover:text-foodhub-maroon"
+                  aria-label="Clear search"
+                  className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white text-gray-400 shadow-sm transition hover:bg-foodhub-maroon hover:text-white"
                 >
                   <X className="size-4" />
                 </button>
               )}
             </div>
 
+            {/* Sort Icon Button */}
             <SortDropdown
               sort={sort}
               setSort={setSort}
               options={SORT_OPTIONS}
             />
 
+            {/* Filter Icon Button */}
             <button
               type="button"
               onClick={() => setFilterOpen(true)}
-              className={`flex items-center justify-center gap-2 rounded-2xl border px-5 py-3 text-sm font-semibold transition lg:hidden ${
+              aria-label="Open filters"
+              className={`flex size-[54px] shrink-0 items-center justify-center rounded-2xl border transition-all duration-300 lg:hidden ${
                 hasFilters
-                  ? "border-foodhub-maroon bg-foodhub-maroon text-white"
-                  : "border-gray-200 bg-white text-gray-600"
+                  ? "border-foodhub-maroon bg-foodhub-maroon text-white shadow-[0_12px_30px_rgba(128,0,32,0.22)]"
+                  : "border-gray-200 bg-white text-gray-600 shadow-sm hover:border-foodhub-maroon/30 hover:text-foodhub-maroon"
               }`}
             >
-              <SlidersHorizontal className="size-4" />
-              Filters
+              <SlidersHorizontal className="size-5" />
             </button>
           </div>
         </FadeUpOnScroll>
@@ -148,7 +152,10 @@ export default function MealsClient({ meals }: MealsClientProps) {
         {hasFilters && (
           <div className="mb-5 flex flex-wrap gap-2">
             {category !== "All" && (
-              <FilterChip label={category} onRemove={() => setCategory("All")} />
+              <FilterChip
+                label={category}
+                onRemove={() => setCategory("All")}
+              />
             )}
 
             {vegOnly && (

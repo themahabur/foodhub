@@ -9,11 +9,13 @@ type OptionObject = {
 };
 
 type RestaurantDropdownProps = {
+  icon?: React.ReactNode;
   value: string;
-  options: string[] | OptionObject[];
+  options: { label: string; value: string }[];
   onChange: (value: string) => void;
-  icon?: ReactNode;
   getLabel?: (value: string) => string;
+  iconOnly?: boolean;
+  ariaLabel?: string;
 };
 
 export default function RestaurantDropdown({

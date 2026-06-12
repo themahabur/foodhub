@@ -216,20 +216,20 @@ export const reviews = [
     rating: 5,
     text: "FoodHub has totally changed my weeknights. The biryani arrives piping hot and the app is so easy to use!",
     name: "Ananya S.",
-    avatar: "/images/avatars/ananya.jpg",
+    avatar: "/ananya.jpg",
   },
   {
     id: 2,
     rating: 5,
     text: "Loved the variety of providers — from Bengali thalis to Thai noodles. Delivery is always on time.",
     name: "Rohit D.",
-    avatar: "/images/avatars/rohit.jpg",
+    avatar: "/rohit.jpg",
   },
   {
     id: 3,
     rating: 4,
     text: "The discounts are real and the food quality is consistently great. My go-to app for ordering in.",
     name: "Megha T.",
-    avatar: "/images/avatars/megha.jpg",
+    avatar: "/megha.jpg",
   },
 ];

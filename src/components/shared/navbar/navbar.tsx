@@ -29,15 +29,17 @@ import {
   DEFAULT_LOGO,
 } from "@/data/navbar.data";
 import { ProfileSidebar } from "../sidebar/profile-sidebar";
+import { usePathname } from "next/navigation";
 
 const Navbar = ({
   logo = DEFAULT_LOGO,
   menu = DEFAULT_MENU,
   cities = DEFAULT_CITIES,
-  defaultCity = "Kolkata",
+  defaultCity = "Dhaka",
   className,
 }: NavbarProps) => {
-  const [activeItem, setActiveItem] = useState("Home");
+  const pathname = usePathname();
+
   const [selectedCity, setSelectedCity] = useState(defaultCity);
 
   const profileMenuItems = roleMenus[CURRENT_ROLE];
@@ -64,10 +66,9 @@ const Navbar = ({
                 <Link
                   key={item.title}
                   href={item.url}
-                  onClick={() => setActiveItem(item.title)}
                   className={cn(
                     "relative px-4 py-2 text-sm font-semibold transition-colors duration-200",
-                    activeItem === item.title
+                    pathname === item.url
                       ? "text-foodhub-maroon after:absolute after:bottom-0 after:left-3 after:right-3 after:h-[2px] after:bg-foodhub-maroon after:rounded-full"
                       : "text-gray-500 hover:text-gray-900",
                   )}
@@ -193,10 +194,9 @@ const Navbar = ({
                           <Link
                             key={item.title}
                             href={item.url}
-                            onClick={() => setActiveItem(item.title)}
                             className={cn(
                               "px-4 py-2 rounded-xl text-sm font-medium transition-colors",
-                              activeItem === item.title
+                              pathname === item.url
                                 ? "bg-foodhub-maroon/5 text-foodhub-maroon font-semibold"
                                 : "text-gray-600 hover:text-black hover:bg-gray-50",
                             )}
