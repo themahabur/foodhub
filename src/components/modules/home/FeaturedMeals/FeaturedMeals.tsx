@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Star, Plus } from "lucide-react";
 import { FadeUpOnScroll, StaggerContainer, StaggerItem } from "@/components/shared/motion/motion-wrapper";
-import { meals } from "@/data/navbar.data";
+import { Meal } from "@/types/meal.types";
 
 
 
-export default function FeaturedMeals() {
+export default function FeaturedMeals({meals}:{meals:Meal[]}) {
   return (
     <section className="w-full py-10 px-4 md:px-8 container mx-auto">
 
@@ -32,8 +32,8 @@ export default function FeaturedMeals() {
               {/* Image */}
               <div className="relative w-full aspect-[4/3] overflow-hidden">
                 <Image
-                  src={meal.image}
-                  alt={meal.name}
+                  src={"/meal-biryani.jpg"}
+                  alt={meal.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -42,9 +42,9 @@ export default function FeaturedMeals() {
               {/* Content */}
               <div className="p-4">
                 <h3 className="font-bold text-gray-900 text-base leading-snug mb-0.5">
-                  {meal.name}
+                  {meal.title}
                 </h3>
-                <p className="text-sm text-gray-400 mb-2">{meal.restaurant}</p>
+                <p className="text-sm text-gray-400 mb-2">{meal.provider.businessName}</p>
 
                 {/* Rating */}
                 <div className="flex items-center gap-1 mb-3">

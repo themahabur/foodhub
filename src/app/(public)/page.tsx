@@ -6,19 +6,29 @@ import HowItWorks from "@/components/modules/home/Howitworks/Howitworks";
 import PromoBanner from "@/components/modules/home/Promobanner/Promobanner";
 import ProviderCTA from "@/components/modules/home/Providercta/Providercta";
 import TopProviders from "@/components/modules/home/TopProviders/TopProviders";
+import Footer from "@/components/shared/Footer/Footer";
+import { mealService } from "@/services/meal.service";
+import { providerService } from "@/services/provider.service";
 import React from "react";
 
-const homePage = () => {
+const homePage = async () => {
+  const { data: meals } = await mealService.getMeals();
+
+  const { data: providers } = await providerService.getProviders();
+
+  console.log(meals, providers);
+
   return (
     <div className="flex flex-col items-center justify-center">
       <HeroSection />
       <Category />
-      <FeaturedMeals />
-      <TopProviders />
-      <HowItWorks/>
-      <PromoBanner/>
-      <CustomerReviews/>
-      <ProviderCTA/>
+      <FeaturedMeals meals={meals} />
+      <TopProviders providers={providers} />
+      <HowItWorks />
+      <PromoBanner />
+      <CustomerReviews />
+      <ProviderCTA />
+      <Footer />
     </div>
   );
 };

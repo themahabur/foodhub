@@ -4,10 +4,11 @@ import { User, LogOut, ChevronRight } from "lucide-react";
 import {
   Sheet, SheetContent, SheetTrigger,
 } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Role, RoleMenuItem } from "@/types/navbar.types";
 import { roleLabels } from "@/data/navbar.data";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 
 interface ProfileSidebarProps {
@@ -16,6 +17,16 @@ interface ProfileSidebarProps {
 }
 
 export const ProfileSidebar = ({ role, menuItems }: ProfileSidebarProps) => {
+  const router = useRouter();
+
+    const { data: session, isPending } = authClient.useSession(); 
+
+  const signOut = async () => {
+    await authClient.signOut();
+    router.push("/");
+  };
+
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -36,10 +47,10 @@ export const ProfileSidebar = ({ role, menuItems }: ProfileSidebarProps) => {
             </div>
             <div className="flex flex-col gap-1.5">
               <p className="text-white font-bold text-lg leading-none tracking-tight">
-                Hello, User!
+                Hello, {session?.user?.name}!
               </p>
               <p className="text-white/60 text-xs leading-none">
-                user@email.com
+                {session?.user?.email}
               </p>
               <span className="self-start mt-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-white text-foodhub-maroon leading-none">
                 {roleLabels[role]}
@@ -75,7 +86,7 @@ export const ProfileSidebar = ({ role, menuItems }: ProfileSidebarProps) => {
 
         {/* Logout */}
         <div className="p-4 border-t border-gray-100">
-          <button className="w-full group flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-semibold text-gray-500 hover:bg-red-50 hover:text-red-500 transition-all duration-150">
+          <button onClick={() => signOut()} className="w-full group flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-semibold text-gray-500 hover:bg-red-50 hover:text-red-500 transition-all duration-150">
             <div className="size-8 rounded-lg bg-gray-100 group-hover:bg-red-100 flex items-center justify-center transition-colors">
               <LogOut className="size-4 text-gray-400 group-hover:text-red-500 transition-colors" />
             </div>

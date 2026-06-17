@@ -45,7 +45,7 @@ export default function RestaurantsClient({
       const searchText = query.toLowerCase();
 
       const matchedSearch =
-        restaurant.name.toLowerCase().includes(searchText) ||
+        restaurant.businessName.toLowerCase().includes(searchText) ||
         restaurant.cuisines.some((cuisine) =>
           cuisine.toLowerCase().includes(searchText)
         );

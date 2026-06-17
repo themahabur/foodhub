@@ -1,14 +1,20 @@
+import { Provider } from "./provider.type";
+
 export type Meal = {
-  id: number;
-  name: string;
-  restaurant: string;
-  category: string;
-  rating: number;
-  price: number;
-  deliveryTime: string;
+  id: string;
+  providerId: string;
+  categoryId: string;
+  title: string;
+  description: string;
   image: string;
-  isVeg: boolean;
-  tags: string[];
+  price: string;
+  stock: number;
+  isAvailable: boolean;
+  preparationTime: number;
+  rating: number;
+  createdAt: string;
+  updatedAt: string;
+  provider:Provider
 };
 
 export type SortValue =

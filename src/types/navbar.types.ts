@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 
-export type Role = "customer" | "provider" | "admin";
+export type Role = "CUSTOMER" | "PROVIDER" | "ADMIN";
 
 export interface MenuItem {
   title: string;

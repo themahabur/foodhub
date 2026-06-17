@@ -33,7 +33,7 @@ export default function MealsClient({ meals }: MealsClientProps) {
       const searchText = query.toLowerCase();
 
       const matchedSearch =
-        meal.name.toLowerCase().includes(searchText) ||
+        meal.businessName.toLowerCase().includes(searchText) ||
         meal.restaurant.toLowerCase().includes(searchText);
 
       const matchedCategory = category === "All" || meal.category === category;

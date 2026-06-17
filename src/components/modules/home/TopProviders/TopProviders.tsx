@@ -1,61 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, Star, Clock } from "lucide-react";
-import { FadeUpOnScroll, StaggerContainer, StaggerItem } from "@/components/shared/motion/motion-wrapper";
+import {
+  FadeUpOnScroll,
+  StaggerContainer,
+  StaggerItem,
+} from "@/components/shared/motion/motion-wrapper";
+import { Provider } from "@/types/provider.type";
 
-const providers = [
-  {
-    id: 1,
-    name: "La Pizzeria",
-    cuisines: "Italian · Pizza",
-    rating: 4.6,
-    deliveryTime: "30–40 min",
-    initial: "L",
-    color: "bg-red-100 text-red-500",
-    href: "/providers/la-pizzeria",
-  },
-  {
-    id: 2,
-    name: "Biryani Darbar",
-    cuisines: "Indian · Biryani",
-    rating: 4.7,
-    deliveryTime: "35–45 min",
-    initial: "B",
-    color: "bg-amber-100 text-amber-500",
-    href: "/providers/biryani-darbar",
-  },
-  {
-    id: 3,
-    name: "Burger House",
-    cuisines: "American · Burgers",
-    rating: 4.5,
-    deliveryTime: "25–35 min",
-    initial: "B",
-    color: "bg-yellow-100 text-yellow-600",
-    href: "/providers/burger-house",
-  },
-  {
-    id: 4,
-    name: "Wok Express",
-    cuisines: "Asian · Noodles",
-    rating: 4.4,
-    deliveryTime: "30–40 min",
-    initial: "W",
-    color: "bg-rose-100 text-rose-500",
-    href: "/providers/wok-express",
-  },
-  {
-    id: 5,
-    name: "Healthy Bowl Co.",
-    cuisines: "Salads · Bowls",
-    rating: 4.6,
-    deliveryTime: "20–30 min",
-    initial: "H",
-    color: "bg-green-100 text-green-600",
-    href: "/providers/healthy-bowl-co",
-  },
-];
-
-export default function TopProviders() {
+export default function TopProviders({ providers }: { providers: Provider[] }) {
   return (
     <section className="w-full py-10 px-4 md:px-8 container mx-auto">
 
@@ -77,31 +29,39 @@ export default function TopProviders() {
         {providers.map((provider) => (
           <StaggerItem key={provider.id}>
             <Link
-              href={provider.href}
+              href={`/provider/${provider.id}`}
               className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-gray-100 hover:border-[#8B1A2B]/15 hover:shadow-md transition-all duration-200 group"
             >
               {/* Avatar */}
-              <div className={`w-12 h-12 shrink-0 rounded-xl flex items-center justify-center text-lg font-bold ${provider.color}`}>
-                {provider.initial}
+              <div className={`w-12 h-12 shrink-0 rounded-xl flex items-center justify-center text-lg font-bold 
+                ${
+                  // provider.color
+                  "bg-foodhub-maroon/10 text-foodhub-maroon"
+                }
+                `}>
+                {provider.businessName.charAt(0).toUpperCase()}
               </div>
 
               {/* Info */}
               <div className="min-w-0">
                 <p className="font-semibold text-gray-900 text-sm truncate group-hover:text-[#8B1A2B] transition-colors duration-200">
-                  {provider.name}
+                  {provider.businessName}
                 </p>
                 <p className="text-xs text-gray-400 truncate mb-1.5">
-                  {provider.cuisines}
+                  {provider.cuisineType.join(", ")}
                 </p>
                 <div className="flex items-center gap-2 text-xs text-gray-500">
                   <span className="flex items-center gap-0.5">
                     <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                    <span className="font-medium text-gray-700">{provider.rating}</span>
+                    <span className="font-medium text-gray-700">{
+                    // provider.rating
+                    "4.5"
+                    }</span>
                   </span>
                   <span className="w-1 h-1 rounded-full bg-gray-300" />
                   <span className="flex items-center gap-0.5">
                     <Clock className="w-3 h-3 text-gray-400" />
-                    {provider.deliveryTime}
+                    {provider.deliveryTime.split(" ")[0]} min
                   </span>
                 </div>
               </div>

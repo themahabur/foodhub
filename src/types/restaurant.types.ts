@@ -1,18 +1,21 @@
-export type Restaurant = {
-  id: number;
-  name: string;
+import { Meal } from "./meal.types";
+
+export type ProviderProfile = {
+  id: string;
+  userId: string;
+  businessName: string;
+  logo?: string;
+  banner?: string;
+  description: string;
   cuisines: string[];
-  category: string;
-  rating: number;
   deliveryTime: string;
+  address: string;
   minOrder: number;
-  image: string;
-  logo: string;
-  initial: string;
-  color: string;
-  tags: string[];
+  rating: number;
   isOpen: boolean;
-  location: string;
+  category: string;
+  tags: string[];
+  meals: Meal[];
 };
 
 export type RestaurantSortValue =
