@@ -45,20 +45,20 @@ export function DashboardSidebar({ role }: DashboardSidebarProps) {
   const menuGroups = dashboardMenus[role];
 
   return (
-    <Sidebar collapsible="icon" className="border-foodhub-muted/40">
+    <Sidebar collapsible="icon" className="border-gray-200">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/dashboard">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-foodhub-maroon text-foodhub-white">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-foodhub-maroon text-white">
                   <UtensilsCrossed className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold text-foodhub-dark">
+                  <span className="truncate font-semibold text-gray-900">
                     FoodHub
                   </span>
-                  <span className="truncate text-xs text-foodhub-dark/60">
+                  <span className="truncate text-xs text-gray-500">
                     {roleLabel[role]} Panel
                   </span>
                 </div>
@@ -85,7 +85,7 @@ export function DashboardSidebar({ role }: DashboardSidebarProps) {
                         className={
                           isActive
                             ? "bg-foodhub-maroon/10 text-foodhub-maroon font-medium border-l-2 border-foodhub-maroon data-[active=true]:bg-foodhub-maroon/10 data-[active=true]:text-foodhub-maroon"
-                            : "text-foodhub-dark/80 hover:bg-foodhub-muted/60 hover:text-foodhub-maroon"
+                            : "text-gray-700 hover:bg-gray-100 hover:text-foodhub-maroon"
                         }
                       >
                         <Link href={item.href}>
@@ -94,7 +94,7 @@ export function DashboardSidebar({ role }: DashboardSidebarProps) {
                         </Link>
                       </SidebarMenuButton>
                       {item.badge && (
-                        <SidebarMenuBadge className="bg-foodhub-yellow text-foodhub-dark">
+                        <SidebarMenuBadge className="bg-amber-400 text-gray-900">
                           {item.badge}
                         </SidebarMenuBadge>
                       )}
@@ -114,22 +114,22 @@ export function DashboardSidebar({ role }: DashboardSidebarProps) {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton
                   size="lg"
-                  className="data-[state=open]:bg-foodhub-muted/60"
+                  className="data-[state=open]:bg-gray-100"
                 >
                   <Avatar className="size-8 rounded-lg">
-                    <AvatarFallback className="rounded-lg bg-foodhub-maroon text-foodhub-white">
+                    <AvatarFallback className="rounded-lg bg-foodhub-maroon text-white">
                       MR
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium text-foodhub-dark">
+                    <span className="truncate font-medium text-gray-900">
                       Mahabur Rahman
                     </span>
-                    <span className="truncate text-xs text-foodhub-dark/60">
+                    <span className="truncate text-xs text-gray-500">
                       mahabur@example.com
                     </span>
                   </div>
-                  <ChevronUp className="ml-auto size-4 text-foodhub-dark/50" />
+                  <ChevronUp className="ml-auto size-4 text-gray-400" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent

@@ -35,7 +35,6 @@ export const roleMenus: Record<Role, RoleMenuItem[]> = {
     { title: "Restaurant", url: "/dashboard/restaurant", icon: Store },
     { title: "Meals", url: "/dashboard/meals", icon: Package },
     { title: "Orders", url: "/dashboard/orders", icon: ShoppingBag },
-    { title: "Earnings", url: "/dashboard/earnings", icon: DollarSign },
     { title: "Profile", url: "/dashboard/profile", icon: User },
     { title: "Settings", url: "/dashboard/settings", icon: Settings },
   ],
@@ -46,8 +45,6 @@ export const roleMenus: Record<Role, RoleMenuItem[]> = {
     { title: "Providers", url: "/dashboard/providers", icon: Building2 },
     { title: "Restaurants", url: "/dashboard/restaurants", icon: Store },
     { title: "Meals", url: "/dashboard/meals", icon: Package },
-    { title: "Orders", url: "/dashboard/orders", icon: ShoppingBag },
-    { title: "Reports", url: "/dashboard/reports", icon: Flag },
     { title: "Settings", url: "/dashboard/settings", icon: Settings },
   ],
 };
