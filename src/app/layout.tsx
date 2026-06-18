@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -24,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("h-full", "antialiased", jakarta.variable)}>
       <body className="min-h-full flex flex-col font-sans">
-        {children}
+        <TooltipProvider>{children}</TooltipProvider>
         <Toaster richColors/>
         </body>
     </html>
