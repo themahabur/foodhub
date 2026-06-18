@@ -10,6 +10,8 @@ import {
   ShieldCheck,
   Users,
   Flag,
+  Store,
+  Building2,
 } from "lucide-react";
 
 
@@ -21,27 +23,34 @@ export const roleLabels: Record<Role, string> = {
 
 export const roleMenus: Record<Role, RoleMenuItem[]> = {
   CUSTOMER: [
-    { title: "Profile", url: "/profile", icon: User },
+    { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
     { title: "Orders", url: "/orders", icon: ShoppingBag },
-    { title: "Wishlist", url: "/wishlist", icon: Heart },
+    { title: "Favorites", url: "/favorites", icon: Heart },
+    { title: "Profile", url: "/profile", icon: User },
     { title: "Settings", url: "/settings", icon: Settings },
   ],
+
   PROVIDER: [
-    { title: "Dashboard", url: "/provider/dashboard", icon: LayoutDashboard },
-    { title: "My Offers / Products", url: "/provider/products", icon: Package },
-    { title: "Orders Received", url: "/provider/orders", icon: ShoppingBag },
+    { title: "Dashboard", url: "/provider", icon: LayoutDashboard },
+    { title: "Restaurant", url: "/provider/restaurant", icon: Store },
+    { title: "Meals", url: "/provider/meals", icon: Package },
+    { title: "Orders", url: "/provider/orders", icon: ShoppingBag },
     { title: "Earnings", url: "/provider/earnings", icon: DollarSign },
+    { title: "Profile", url: "/provider/profile", icon: User },
     { title: "Settings", url: "/provider/settings", icon: Settings },
   ],
+
   ADMIN: [
-    { title: "Admin Dashboard", url: "/admin/dashboard", icon: ShieldCheck },
-    { title: "Users Management", url: "/admin/users", icon: Users },
-    { title: "Offers Moderation", url: "/admin/moderation", icon: Flag },
-    { title: "Reports", url: "/admin/reports", icon: LayoutDashboard },
+    { title: "Dashboard", url: "/admin", icon: ShieldCheck },
+    { title: "Users", url: "/admin/users", icon: Users },
+    { title: "Providers", url: "/admin/providers", icon: Building2 },
+    { title: "Restaurants", url: "/admin/restaurants", icon: Store },
+    { title: "Meals", url: "/admin/meals", icon: Package },
+    { title: "Orders", url: "/admin/orders", icon: ShoppingBag },
+    { title: "Reports", url: "/admin/reports", icon: Flag },
     { title: "Settings", url: "/admin/settings", icon: Settings },
   ],
 };
-
 export const DEFAULT_MENU: { title: string; url: string }[] = [
   { title: "Home", url: "/" },
   { title: "Explore", url: "/explore" },

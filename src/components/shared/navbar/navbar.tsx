@@ -29,6 +29,7 @@ import {
 import { ProfileSidebar } from "../sidebar/profile-sidebar";
 import { usePathname } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { CartSheet } from "../cart-sheet/cart-sheet";
 
 const Navbar = ({
   logo = DEFAULT_LOGO,
@@ -123,6 +124,9 @@ const profileMenuItems = roleMenus[role] ?? [];
                     </DropdownMenuContent>
                   </DropdownMenu>
 
+                  {/* Cart */}
+                  <CartSheet />
+
                   {/* Profile */}
                   <ProfileSidebar
                     role={role}
@@ -184,6 +188,9 @@ const profileMenuItems = roleMenus[role] ?? [];
                   </DropdownMenuContent>
                 </DropdownMenu>
               )}
+
+              {/* Cart */}
+              {!isPending && session && <CartSheet />}
 
               {/* Auth / Profile */}
               {isPending ? null : session ? (
