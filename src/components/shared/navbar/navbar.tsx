@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, MapPin, ChevronDown } from "lucide-react";
+import { Menu, MapPin, ChevronDown, UtensilsCrossed } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -64,7 +64,7 @@ const profileMenuItems = roleMenus[role] ?? [];
             {/* Logo */}
             <Link href={logo.url} className="flex items-center gap-2.5 group">
               <div className="size-8 rounded-lg bg-foodhub-maroon/8 border border-foodhub-maroon/15 flex items-center justify-center">
-                <img src={logo.src} alt={logo.alt} className="max-h-5" />
+                <UtensilsCrossed className="size-4 text-foodhub-maroon" />
               </div>
               <h1 className="text-xl font-bold">
                 Food<span className="text-foodhub-maroon">Hub</span>
