@@ -64,22 +64,22 @@ export const dashboardMenus: Record<DashboardRole, DashboardMenuGroup[]> = {
       items: [
         {
           label: "Dashboard",
-          href: "/provider",
+          href: "/dashboard",
           icon: LayoutDashboard,
         },
         {
           label: "Restaurant",
-          href: "/provider/restaurant",
+          href: "/dashboard/restaurant",
           icon: Store,
         },
         {
           label: "Meals",
-          href: "/provider/meals",
+          href: "/dashboard/meals",
           icon: UtensilsCrossed,
         },
         {
           label: "Orders",
-          href: "/provider/orders",
+          href: "/dashboard/orders",
           icon: PackageCheck,
           badge: 5,
         },
@@ -90,22 +90,22 @@ export const dashboardMenus: Record<DashboardRole, DashboardMenuGroup[]> = {
       items: [
         {
           label: "Reviews",
-          href: "/provider/reviews",
+          href: "/dashboard/reviews",
           icon: Star,
         },
         {
           label: "Earnings",
-          href: "/provider/earnings",
+          href: "/dashboard/earnings",
           icon: Wallet,
         },
         {
           label: "Profile",
-          href: "/provider/profile",
+          href: "/dashboard/profile",
           icon: User,
         },
         {
           label: "Settings",
-          href: "/provider/settings",
+          href: "/dashboard/settings",
           icon: Settings,
         },
       ],
@@ -117,32 +117,32 @@ export const dashboardMenus: Record<DashboardRole, DashboardMenuGroup[]> = {
       items: [
         {
           label: "Dashboard",
-          href: "/admin",
+          href: "/dashboard",
           icon: LayoutDashboard,
         },
         {
           label: "Users",
-          href: "/admin/users",
+          href: "/dashboard/users",
           icon: Users,
         },
         {
           label: "Providers",
-          href: "/admin/providers",
+          href: "/dashboard/providers",
           icon: Store,
         },
         {
           label: "Restaurants",
-          href: "/admin/restaurants",
+          href: "/dashboard/restaurants",
           icon: Building2,
         },
         {
           label: "Meals",
-          href: "/admin/meals",
+          href: "/dashboard/meals",
           icon: UtensilsCrossed,
         },
         {
           label: "Orders",
-          href: "/admin/orders",
+          href: "/dashboard/orders",
           icon: PackageCheck,
         },
       ],
@@ -152,12 +152,12 @@ export const dashboardMenus: Record<DashboardRole, DashboardMenuGroup[]> = {
       items: [
         {
           label: "Reports",
-          href: "/admin/reports",
+          href: "/dashboard/reports",
           icon: BarChart3,
         },
         {
           label: "Settings",
-          href: "/admin/settings",
+          href: "/dashboard/settings",
           icon: Settings,
         },
       ],

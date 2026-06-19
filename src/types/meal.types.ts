@@ -14,7 +14,7 @@ export type Meal = {
   rating: number;
   createdAt: string;
   updatedAt: string;
-  provider:Provider
+  provider: Provider;
 };
 
 export type SortValue =
