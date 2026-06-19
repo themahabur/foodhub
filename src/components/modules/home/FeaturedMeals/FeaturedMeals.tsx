@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Star, Plus } from "lucide-react";
 import { FadeUpOnScroll, StaggerContainer, StaggerItem } from "@/components/shared/motion/motion-wrapper";
-import { Meal } from "@/types/meal.types";
+import { Meal } from "@/types/meal/meal.types";
 
 
 

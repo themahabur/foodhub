@@ -1,14 +1,15 @@
-export type Provider = {
+export interface Provider {
   id: string;
   userId: string;
   businessName: string;
   logo: string;
-  banner: string;
-  description: string;
-  cuisineType: string[];
-  deliveryTime: string;
   address: string;
+  city: string;
+  phone: string;
   isVerified: boolean;
+  isOpen: boolean;
+  rating: number;
+  totalOrders: number;
   createdAt: string;
   updatedAt: string;
-};
+}

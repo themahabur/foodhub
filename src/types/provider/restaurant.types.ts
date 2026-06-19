@@ -1,4 +1,4 @@
-import { Meal } from "./meal.types";
+import { Meal } from "./meal/meal.types";
 
 export type ProviderProfile = {
   id: string;

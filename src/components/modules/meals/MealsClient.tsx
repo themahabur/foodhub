@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 
-import type { Meal, SortValue } from "@/types/meal.types";
+import type { Meal, SortValue } from "@/types/meal/meal.types";
 import { CATEGORIES, SORT_OPTIONS } from "@/data/meals.data";
 
 import {

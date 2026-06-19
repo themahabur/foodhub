@@ -1,4 +1,4 @@
-import { MealCategory } from "@/types/mealForm.type";
+import { MealCategory } from "@/types/meal/mealForm.type";
 
 
 export const MEAL_CATEGORIES: { value: MealCategory; label: string }[] = [

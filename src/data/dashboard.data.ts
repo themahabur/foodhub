@@ -59,58 +59,48 @@ export const dashboardMenus: Record<DashboardRole, DashboardMenuGroup[]> = {
     },
   ],
 
-  PROVIDER: [
-    {
-      items: [
-        {
-          label: "Dashboard",
-          href: "/dashboard",
-          icon: LayoutDashboard,
-        },
-        {
-          label: "Restaurant",
-          href: "/dashboard/restaurant",
-          icon: Store,
-        },
-        {
-          label: "Meals",
-          href: "/dashboard/meals",
-          icon: UtensilsCrossed,
-        },
-        {
-          label: "Orders",
-          href: "/dashboard/orders",
-          icon: PackageCheck,
-          badge: 5,
-        },
-      ],
-    },
-    {
-      label: "Business",
-      items: [
-        {
-          label: "Reviews",
-          href: "/dashboard/reviews",
-          icon: Star,
-        },
-        {
-          label: "Earnings",
-          href: "/dashboard/earnings",
-          icon: Wallet,
-        },
-        {
-          label: "Profile",
-          href: "/dashboard/profile",
-          icon: User,
-        },
-        {
-          label: "Settings",
-          href: "/dashboard/settings",
-          icon: Settings,
-        },
-      ],
-    },
-  ],
+PROVIDER: [
+  {
+    items: [
+      {
+        label: "Overview",
+        href: "/dashboard",
+        icon: LayoutDashboard,
+      },
+      {
+        label: "Meals",
+        href: "/dashboard/meals",
+        icon: UtensilsCrossed,
+      },
+      {
+        label: "Orders",
+        href: "/dashboard/orders",
+        icon: PackageCheck,
+        badge: 5,
+      },
+    ],
+  },
+  {
+    label: "Management",
+    items: [
+      {
+        label: "Reviews",
+        href: "/dashboard/reviews",
+        icon: Star,
+      },
+      {
+        label: "Profile",
+        href: "/dashboard/profile",
+        icon: User,
+      },
+      {
+        label: "Settings",
+        href: "/dashboard/settings",
+        icon: Settings,
+      },
+    ],
+  },
+],
 
   ADMIN: [
     {

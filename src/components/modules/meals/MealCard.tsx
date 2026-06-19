@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Plus, Star } from "lucide-react";
 
-import type { Meal } from "@/types/meal.types";
+import type { Meal } from "@/types/meal/meal.types";
 // import { EMOJI, TAG_COLORS } from "@/data/meals.data";
 
 type MealCardProps = {

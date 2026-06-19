@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import type { SortValue } from "@/types/meal.types";
+import type { SortValue } from "@/types/meal/meal.types";
 
 type SortDropdownProps = {
   sort: SortValue;

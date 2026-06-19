@@ -5,7 +5,7 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/shared/motion/motion-wrapper";
-import { Provider } from "@/types/provider.type";
+import { Provider } from "@/types/provider/provider.type";
 
 export default function TopProviders({ providers }: { providers: Provider[] }) {
   return (
