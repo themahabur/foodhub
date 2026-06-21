@@ -12,7 +12,6 @@ import Link from "next/link";
 import { UtensilsCrossed } from "lucide-react";
 export const dynamic = "force-dynamic";
 
-
 const dashboardLayout = async ({
   admin,
   customer,
@@ -31,22 +30,22 @@ const dashboardLayout = async ({
   return (
     <SidebarProvider>
       <DashboardSidebar role={roles} />
-      <SidebarInset className="bg-gray-50">
-        <header className="flex h-14 shrink-0 items-center gap-2 border-b border-gray-200 bg-white px-4">
-          <SidebarTrigger className="text-gray-700 hover:bg-gray-100 hover:text-foodhub-maroon" />
+      <SidebarInset className="bg-neutral-50">
+        <header className="flex h-14 shrink-0 items-center gap-2 border-b border-foodhub-maroon/10 bg-white/80 backdrop-blur-sm px-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+          <SidebarTrigger className="text-neutral-600 hover:bg-foodhub-maroon/5 hover:text-foodhub-maroon transition-colors" />
 
           <Link
             href="/dashboard"
             className="flex items-center gap-2 ml-2 lg:hidden"
           >
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-foodhub-maroon text-white">
+            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-gradient-to-br from-foodhub-maroon to-foodhub-maroon/80 text-white shadow-sm ring-1 ring-foodhub-maroon/20">
               <UtensilsCrossed className="size-4" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold text-gray-900">
+              <span className="truncate font-semibold text-neutral-900">
                 FoodHub
               </span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-foodhub-maroon/70 font-medium">
                 {roles === "ADMIN" ? "Admin" : roles==="CUSTOMER" ? "Customer" : "Provider"} Panel
               </span>
             </div>

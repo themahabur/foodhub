@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Search } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -53,12 +53,19 @@ export function MealsFilters() {
   }
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <div className="flex flex-col gap-3 rounded-xl border bg-white p-4 shadow-sm sm:flex-row sm:items-center">
+      <div className="flex items-center gap-2 text-gray-400 sm:hidden">
+        <SlidersHorizontal className="size-4" />
+        <span className="text-xs font-medium uppercase tracking-wide">
+          Filters
+        </span>
+      </div>
+
       <div className="relative flex-1">
-        <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-500" />
+        <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
         <Input
           placeholder="Search meals by name..."
-          className="pl-9"
+          className="border-gray-200 pl-9 focus-visible:ring-foodhub-maroon/30"
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
@@ -71,7 +78,7 @@ export function MealsFilters() {
         defaultValue={searchParams.get("category") ?? "all"}
         onValueChange={(value) => updateParam("category", value)}
       >
-        <SelectTrigger className="w-full sm:w-[180px]">
+        <SelectTrigger className="w-full border-gray-200 sm:w-[180px]">
           <SelectValue placeholder="Category" />
         </SelectTrigger>
         <SelectContent>
@@ -87,7 +94,7 @@ export function MealsFilters() {
         defaultValue={searchParams.get("availability") ?? "all"}
         onValueChange={(value) => updateParam("availability", value)}
       >
-        <SelectTrigger className="w-full sm:w-[160px]">
+        <SelectTrigger className="w-full border-gray-200 sm:w-[160px]">
           <SelectValue placeholder="Availability" />
         </SelectTrigger>
         <SelectContent>
