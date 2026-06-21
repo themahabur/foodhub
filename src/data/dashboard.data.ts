@@ -16,6 +16,7 @@ import {
   Tag,
   Building2,
   User,
+  ChefHat,
 } from "lucide-react";
 import type { DashboardMenuGroup, DashboardRole } from "@/types/dashboard.type";
 
@@ -83,6 +84,11 @@ PROVIDER: [
   {
     label: "Management",
     items: [
+      {
+        label: "Restaurant",
+        href: "/dashboard/restaurant",
+        icon: ChefHat,
+      },
       {
         label: "Reviews",
         href: "/dashboard/reviews",
