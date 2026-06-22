@@ -1,3 +1,5 @@
+import { Category } from "../category/category.type";
+
 export type MealCategory =
   | "biryani-rice"
   | "curry"
@@ -12,7 +14,7 @@ export type MealCategory =
 
 export interface MealFormData {
   name: string;
-  category: MealCategory | "";
+  category: Category | "";
   price: string;
   description: string;
   image: File | null;

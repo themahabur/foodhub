@@ -2,15 +2,21 @@ import { MealsFilters } from "@/components/modules/dashboard/provider/meals/meal
 import { MealsHeader } from "@/components/modules/dashboard/provider/meals/meals-header";
 import { MealsTable } from "@/components/modules/dashboard/provider/meals/meals-table";
 import { meals } from "@/data/meals.data";
+import { mealService } from "@/services/meal.service";
+import { Meal } from "@/types/meal/meal.types";
 
 export default async function ProviderMealsPage({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string; category?: string; availability?: string }>;
 }) {
+
+
   const { q, category, availability } = await searchParams;
 
-  const filteredMeals = meals.filter((meal) => {
+  const { data: meals } = await mealService.getMeals();
+
+  const filteredMeals = meals.filter((meal: Meal) => {
     const matchesQuery = q ? meal.title.toLowerCase().includes(q.toLowerCase()) : true;
     const matchesCategory = category ? meal.category.slug === category : true;
     const matchesAvailability =

@@ -1,25 +1,28 @@
 import { createEnv } from "@t3-oss/env-nextjs";
-import * as z from "zod";
+import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    // BACKEND_API: z.url(),
-    // FRONTEND_API: z.url(),
-    // API_URL: z.url(),
-    AUTH_URL: z.url(),
+    AUTH_URL: z.string().url(),
+
+    CLOUDINARY_CLOUD_NAME: z.string().min(1),
+    CLOUDINARY_API_KEY: z.string().min(1),
+    CLOUDINARY_API_SECRET: z.string().min(1),
   },
 
   client: {
-    NEXT_PUBLIC_BACKEND_URL: z.url(),
-    NEXT_PUBLIC_FRONTEND_URL: z.url(),
-    NEXT_PUBLIC_API_URL: z.url(),
+    NEXT_PUBLIC_BACKEND_URL: z.string().url(),
+    NEXT_PUBLIC_FRONTEND_URL: z.string().url(),
+    NEXT_PUBLIC_API_URL: z.string().url(),
   },
 
   runtimeEnv: {
-    // BACKEND_API: process.env.BACKEND_API,
-    // FRONTEND_API: process.env.FRONTEND_API,
-    // API_URL: process.env.API_URL,
     AUTH_URL: process.env.AUTH_URL,
+
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+
     NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
     NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,

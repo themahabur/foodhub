@@ -63,7 +63,7 @@ export function MealsTable({ meals }: { meals: Meal[] }) {
               <TableCell>
                 <div className="relative size-12 overflow-hidden rounded-lg ring-1 ring-gray-200">
                   <Image
-                    src={meal.image}
+                    src={"/meal-biryani.jpg"}
                     alt={meal.title}
                     fill
                     className="object-cover"

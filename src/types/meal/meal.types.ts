@@ -40,7 +40,6 @@ export type CreateMealPayload = {
   stock: number;
   isAvailable: boolean;
   preparationTime: number;
-  rating: number;
 };
 
 export interface MealFormData {
