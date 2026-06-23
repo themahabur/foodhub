@@ -2,7 +2,7 @@ import { env } from "@/env";
 import { cookies } from "next/headers";
 
 const getProviders = async () => {
-  const response = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/api/v1/providers`);
+  const response = await fetch(`${env.NEXT_PUBLIC_BACKEND_URL}/api/v1/providers/all`);
   const providers = await response.json();
   return providers;
 };

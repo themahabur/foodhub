@@ -3,13 +3,34 @@ export interface Provider {
   userId: string;
   businessName: string;
   logo: string;
+  banner: string;
+  description: string;
+  cuisineType: string[];
+  deliveryTime: string;
   address: string;
-  city: string;
-  phone: string;
-  isVerified: boolean;
+  minOrder: number | null;
+  rating: number | null;
   isOpen: boolean;
-  rating: number;
-  totalOrders: number;
+  tags: string[];
+  isVerified: boolean;
   createdAt: string;
   updatedAt: string;
+  user: User;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  emailVerified: boolean;
+  image: string | null;
+  createdAt: string;
+  updatedAt: string;
+  role: "CUSTOMER" | "PROVIDER" | "ADMIN";
+  phone: string | null;
+  address: string | null;
+  status: "ACTIVE" | "INACTIVE" | "SUSPENDED";
+  banned: boolean;
+  banReason: string | null;
+  banExpires: string | null;
 }

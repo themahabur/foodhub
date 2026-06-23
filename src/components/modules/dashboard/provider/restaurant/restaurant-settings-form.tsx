@@ -1,7 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Store, Clock, MapPin, UtensilsCrossed, Phone } from "lucide-react";
+import { useEffect } from "react";
+import {
+  Store,
+  Clock,
+  MapPin,
+  UtensilsCrossed,
+  type LucideIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,25 +20,68 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { toast } from "sonner";
-import { RestaurantSettings } from "@/types/provider/restaurant.type";
-import { CUISINE_OPTIONS, INITIAL_RESTAURANT_SETTINGS } from "@/data/restaurant/restaurant.data";
-import { ImageUploadField } from "./image-upload-field";
-import { BusinessHoursEditor } from "./business-hours-editor";
-import { TagInput } from "./tag-input";
 
+import { ImageUploadField } from "./image-upload-field";
+import { TagInput } from "./tag-input";
+import { CUISINE_OPTIONS } from "@/data/restaurant/restaurant.data";
+import { Provider } from "@/types/provider/provider.type";
+import z from "zod";
+import { useForm } from "@tanstack/react-form";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+
+/* ---------------- TYPES ---------------- */
+
+export interface ProviderSettings {
+  businessName: string;
+  logo: string | null;
+  banner: string | null;
+  description: string;
+  cuisineType: string[];
+  deliveryTime: string;
+  address: string;
+  minOrder: number | null;
+  isOpen: boolean;
+  tags: string[];
+}
+
+/* ---------------- SCHEMA ---------------- */
+
+const formSchema = z.object({
+  businessName: z.string().min(1, "Business name is required"),
+  logo: z.string().nullable(),
+  banner: z.string().nullable(),
+  description: z.string().min(1, "Description is required"),
+  cuisineType: z.array(z.string()),
+  deliveryTime: z.string().min(1, "Delivery time is required"),
+  address: z.string().min(1, "Address is required"),
+  minOrder: z.number().nullable(),
+  isOpen: z.boolean(),
+  tags: z.array(z.string()),
+});
+
+/* ---------------- PROPS ---------------- */
+
+type Props = {
+  success: boolean;
+  message: string;
+  data: Provider | null;
+  error: string;
+};
+
+/* ---------------- SECTION HEADER ---------------- */
 
 function SectionHeader({
   icon: Icon,
   title,
   description,
 }: {
-  icon: typeof Store;
+  icon: LucideIcon;
   title: string;
   description: string;
 }) {
   return (
     <CardHeader className="flex flex-row items-start gap-3 space-y-0">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-foodhub-maroon/10">
+      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-foodhub-maroon/10">
         <Icon className="h-5 w-5 text-foodhub-maroon" />
       </div>
       <div>
@@ -43,228 +92,240 @@ function SectionHeader({
   );
 }
 
-export function RestaurantSettingsForm() {
-  const [data, setData] = useState<RestaurantSettings>(
-    INITIAL_RESTAURANT_SETTINGS
-  );
-  const [isSaving, setIsSaving] = useState(false);
+/* ---------------- FORM ---------------- */
 
-  function update<K extends keyof RestaurantSettings>(
-    key: K,
-    value: RestaurantSettings[K]
-  ) {
-    setData((prev) => ({ ...prev, [key]: value }));
-  }
+export function RestaurantSettingsForm({ provider }: { provider: Props }) {
+  const providerData = provider?.data;
+  const isEditMode = !!providerData?.id;
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (!data.name.trim()) {
-      toast.error("Restaurant name is required");
-      return;
-    }
-    if (!data.phone.trim()) {
-      toast.error("Contact phone number is required");
-      return;
-    }
-
-    setIsSaving(true);
-    // No backend yet — replace this block with a server action / API call.
-    // e.g. await updateRestaurantSettings(data)
-    console.log("Restaurant settings (local state only):", data);
-    await new Promise((res) => setTimeout(res, 600));
-    setIsSaving(false);
-
-    toast.success("Restaurant settings saved");
-  }
+  const form = useForm({
+    defaultValues: {
+      businessName: providerData?.businessName ?? "",
+      logo: providerData?.logo ?? null,
+      banner: providerData?.banner ?? null,
+      description: providerData?.description ?? "",
+      cuisineType: providerData?.cuisineType ?? [],
+      deliveryTime: providerData?.deliveryTime ?? "",
+      address: providerData?.address ?? "",
+      minOrder: providerData?.minOrder ?? null,
+      isOpen: providerData?.isOpen ?? true,
+      tags: providerData?.tags ?? [],
+    } as ProviderSettings,
+    validators: {
+      onSubmit: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      try {
+        if (isEditMode) {
+          console.log("UPDATE PROVIDER:", value);
+          toast.success("Restaurant updated successfully");
+        } else {
+          console.log("CREATE PROVIDER:", value);
+          toast.success("Restaurant created successfully");
+        }
+      } catch (err) {
+        toast.error("Something went wrong");
+      }
+    },
+  });
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Restaurant Information */}
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        form.handleSubmit();
+      }}
+      className="space-y-6"
+    >
+      {/* MODE */}
+      <div className="text-sm text-gray-500">
+        Mode:{" "}
+        <span className="font-medium text-foodhub-maroon">
+          {isEditMode ? "Update Provider" : "Create Provider"}
+        </span>
+      </div>
+
+      {/* ---------------- BUSINESS INFO ---------------- */}
       <Card>
         <SectionHeader
           icon={Store}
-          title="Restaurant information"
-          description="Basic details customers see on your restaurant page."
+          title="Business information"
+          description="Basic details shown to your customers."
         />
+
         <CardContent className="space-y-4">
-          <div className="space-y-1.5">
-            <Label htmlFor="name">Restaurant name</Label>
-            <Input
-              id="name"
-              value={data.name}
-              onChange={(e) => update("name", e.target.value)}
-              placeholder="e.g. Rajshahi Biryani House"
-              required
-            />
-          </div>
+          <form.Field name="businessName">
+            {(field) => (
+              <Field>
+                <FieldLabel>Business name</FieldLabel>
+                <Input
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              value={data.description}
-              onChange={(e) => update("description", e.target.value)}
-              placeholder="Tell customers what makes your restaurant special."
-              rows={4}
-            />
-          </div>
+          <form.Field name="description">
+            {(field) => (
+              <Field>
+                <FieldLabel>Description</FieldLabel>
+                <Textarea
+                  rows={4}
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
         </CardContent>
       </Card>
 
-      {/* Cover Image & Logo */}
+      {/* ---------------- IMAGES ---------------- */}
       <Card>
         <SectionHeader
           icon={Store}
-          title="Cover image & logo"
-          description="Shown at the top of your restaurant page and in search results."
+          title="Brand assets"
+          description="Logo and banner shown across platform."
         />
-        <CardContent className="grid gap-6 sm:grid-cols-[1fr_auto]">
-          <ImageUploadField
-            label="Cover image"
-            description="Recommended size 1200×400px"
-            value={data.coverImage}
-            onChange={(v) => update("coverImage", v)}
-            aspect="cover"
-          />
-          <ImageUploadField
-            label="Logo"
-            description="Square, at least 200×200px"
-            value={data.logo}
-            onChange={(v) => update("logo", v)}
-            aspect="square"
-          />
+
+        <CardContent className="grid gap-6 sm:grid-cols-2">
+          <form.Field name="logo">
+            {(field) => (
+              <ImageUploadField
+                label="Logo"
+                value={field.state.value}
+                onChange={field.handleChange}
+                aspect="square"
+              />
+            )}
+          </form.Field>
+
+          <form.Field name="banner">
+            {(field) => (
+              <ImageUploadField
+                label="Banner"
+                value={field.state.value}
+                onChange={field.handleChange}
+                aspect="cover"
+              />
+            )}
+          </form.Field>
         </CardContent>
       </Card>
 
-      {/* Business Hours */}
+      {/* ---------------- DELIVERY ---------------- */}
       <Card>
         <SectionHeader
           icon={Clock}
-          title="Business hours"
-          description="Customers will only be able to order while you're open."
+          title="Delivery information"
+          description="Delivery time and minimum order."
         />
-        <CardContent>
-          <BusinessHoursEditor
-            hours={data.businessHours}
-            onChange={(h) => update("businessHours", h)}
-          />
-        </CardContent>
-      </Card>
 
-      {/* Delivery Area */}
-      <Card>
-        <SectionHeader
-          icon={MapPin}
-          title="Delivery area"
-          description="Areas you currently deliver to, and your maximum delivery radius."
-        />
         <CardContent className="space-y-4">
-          <div className="space-y-1.5">
-            <Label>Delivery areas / zones</Label>
-            <TagInput
-              values={data.deliveryAreas}
-              onChange={(v) => update("deliveryAreas", v)}
-              placeholder="e.g. Shaheb Bazar, Rajshahi"
-            />
-          </div>
+          <form.Field name="deliveryTime">
+            {(field) => (
+              <Input
+                value={field.state.value}
+                onChange={(e) => field.handleChange(e.target.value)}
+                placeholder="20-35 mins"
+              />
+            )}
+          </form.Field>
 
-          <div className="max-w-xs space-y-1.5">
-            <Label htmlFor="radius">Max delivery radius (km)</Label>
-            <Input
-              id="radius"
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="0.5"
-              value={data.deliveryRadius}
-              onChange={(e) => update("deliveryRadius", e.target.value)}
-              placeholder="e.g. 5"
-            />
-          </div>
+          <form.Field name="minOrder">
+            {(field) => (
+              <Input
+                type="number"
+                value={field.state.value ?? ""}
+                onChange={(e) => field.handleChange(Number(e.target.value))}
+                placeholder="Minimum order"
+              />
+            )}
+          </form.Field>
+
+          <form.Field name="address">
+            {(field) => (
+              <Input
+                value={field.state.value}
+                onChange={(e) => field.handleChange(e.target.value)}
+                placeholder="Address"
+              />
+            )}
+          </form.Field>
         </CardContent>
       </Card>
 
-      {/* Cuisine Types */}
+      {/* ---------------- CUISINE ---------------- */}
       <Card>
         <SectionHeader
           icon={UtensilsCrossed}
           title="Cuisine types"
-          description="Helps customers find you when browsing by category."
+          description="Food categories"
         />
+
         <CardContent>
-          <TagInput
-            values={data.cuisineTypes}
-            onChange={(v) => update("cuisineTypes", v)}
-            placeholder="Add a cuisine type"
-            suggestions={CUISINE_OPTIONS}
-          />
+          <form.Field name="cuisineType">
+            {(field) => (
+              <TagInput
+                values={field.state.value}
+                onChange={field.handleChange}
+                suggestions={CUISINE_OPTIONS}
+              />
+            )}
+          </form.Field>
         </CardContent>
       </Card>
 
-      {/* Contact Information */}
+      {/* ---------------- TAGS + STATUS ---------------- */}
       <Card>
         <SectionHeader
-          icon={Phone}
-          title="Contact information"
-          description="How customers and FoodHub support can reach you."
+          icon={MapPin}
+          title="Tags & Status"
+          description="Control visibility"
         />
-        <CardContent className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-1.5">
-            <Label htmlFor="phone">Phone number</Label>
-            <Input
-              id="phone"
-              type="tel"
-              value={data.phone}
-              onChange={(e) => update("phone", e.target.value)}
-              placeholder="01XXXXXXXXX"
-              required
-            />
-          </div>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              value={data.email}
-              onChange={(e) => update("email", e.target.value)}
-              placeholder="restaurant@example.com"
-            />
-          </div>
+        <CardContent className="space-y-4">
+          <form.Field name="tags">
+            {(field) => (
+              <TagInput
+                values={field.state.value}
+                onChange={field.handleChange}
+              />
+            )}
+          </form.Field>
 
-          <div className="space-y-1.5 sm:col-span-2">
-            <Label htmlFor="address">Address</Label>
-            <Input
-              id="address"
-              value={data.address}
-              onChange={(e) => update("address", e.target.value)}
-              placeholder="House, road, area"
-            />
-          </div>
+          <form.Field name="isOpen">
+            {(field) => (
+              <div className="flex items-center justify-between">
+                <Label>Status</Label>
 
-          <div className="space-y-1.5">
-            <Label htmlFor="city">City</Label>
-            <Input
-              id="city"
-              value={data.city}
-              onChange={(e) => update("city", e.target.value)}
-              placeholder="e.g. Rajshahi"
-            />
-          </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => field.handleChange(!field.state.value)}
+                  className={
+                    field.state.value ? "text-foodhub-maroon" : "text-gray-500"
+                  }
+                >
+                  {field.state.value ? "Open" : "Closed"}
+                </Button>
+              </div>
+            )}
+          </form.Field>
         </CardContent>
       </Card>
 
-      <div className="flex justify-end gap-3 pb-2">
-        <Button type="button" variant="outline" disabled={isSaving}>
+      {/* ---------------- ACTIONS ---------------- */}
+      <div className="flex justify-end gap-3">
+        <Button type="button" variant="outline">
           Cancel
         </Button>
-        <Button
-          type="submit"
-          disabled={isSaving}
-          className="bg-foodhub-maroon text-foodhub-white hover:bg-foodhub-maroon/90"
-        >
-          {isSaving ? "Saving..." : "Save changes"}
+
+        <Button type="submit" className="bg-foodhub-maroon text-white">
+          {isEditMode ? "Update" : "Create"}
         </Button>
       </div>
     </form>

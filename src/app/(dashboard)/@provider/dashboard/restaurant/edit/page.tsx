@@ -1,6 +1,10 @@
+import { getProvider } from "@/actions/provider.action";
 import { RestaurantSettingsForm } from "@/components/modules/dashboard/provider/restaurant/restaurant-settings-form";
 
-export default function RestaurantSettingsPage() {
+export default async function RestaurantSettingsPage() {
+
+  const provider = await getProvider();
+
   return (
     <div className="mx-auto max-w-3xl space-y-1 px-4 py-6 sm:px-6">
       <h1 className="text-2xl font-semibold text-foodhub-dark">
@@ -10,7 +14,7 @@ export default function RestaurantSettingsPage() {
         Manage how your restaurant appears to customers on FoodHub.
       </p>
 
-      <RestaurantSettingsForm />
+      <RestaurantSettingsForm provider={provider} />
     </div>
   );
 }
