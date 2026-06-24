@@ -34,7 +34,7 @@ export function MealsTable({ meals }: { meals: Meal[] }) {
     <div className="overflow-hidden rounded-xl border shadow-sm">
       <Table>
         <TableHeader>
-          <TableRow className="bg-gray-50/80 hover:bg-gray-50/80">
+          <TableRow className="bg-white hover:bg-gray-50/80">
             <TableHead className="w-16">Image</TableHead>
             <TableHead className="text-xs font-semibold uppercase tracking-wide text-gray-500">
               Name
@@ -58,7 +58,7 @@ export function MealsTable({ meals }: { meals: Meal[] }) {
           {meals.map((meal) => (
             <TableRow
               key={meal.id}
-              className="transition-colors hover:bg-foodhub-maroon/[0.03]"
+              className="transition-colors hover:bg-gray-50/80"
             >
               <TableCell>
                 <div className="relative size-12 overflow-hidden rounded-lg ring-1 ring-gray-200">

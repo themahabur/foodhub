@@ -14,7 +14,11 @@ export default async function ProviderMealsPage({
 
   const { q, category, availability } = await searchParams;
 
-  const { data: meals } = await mealService.getMeals();
+  const data = await mealService.getMeals();
+
+  console.log(data);
+
+  const meals = data.data;
 
   const filteredMeals = meals.filter((meal: Meal) => {
     const matchesQuery = q ? meal.title.toLowerCase().includes(q.toLowerCase()) : true;
