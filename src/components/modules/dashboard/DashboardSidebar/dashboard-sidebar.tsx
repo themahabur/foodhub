@@ -27,8 +27,7 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DashboardRole } from "@/types/dashboard.type";
 import { dashboardMenus } from "@/data/dashboard.data";
-
-
+import { signOut } from "better-auth/api";
 
 const roleLabel: Record<DashboardRole, string> = {
   CUSTOMER: "Customer",
@@ -36,13 +35,18 @@ const roleLabel: Record<DashboardRole, string> = {
   ADMIN: "Admin",
 };
 
-interface DashboardSidebarProps {
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
   role: DashboardRole;
 }
 
-export function DashboardSidebar({ role }: DashboardSidebarProps) {
+export function DashboardSidebar({ user }: {user: User}) {
   const pathname = usePathname();
-  const menuGroups = dashboardMenus[role];
+  const menuGroups = dashboardMenus[user.role];
+
 
   return (
     <Sidebar collapsible="icon" className="border-gray-200">
@@ -59,7 +63,7 @@ export function DashboardSidebar({ role }: DashboardSidebarProps) {
                     FoodHub
                   </span>
                   <span className="truncate text-xs text-gray-500">
-                    {roleLabel[role]} Panel
+                    {roleLabel[user.role]} Panel
                   </span>
                 </div>
               </Link>
@@ -71,7 +75,9 @@ export function DashboardSidebar({ role }: DashboardSidebarProps) {
       <SidebarContent>
         {menuGroups.map((group, idx) => (
           <SidebarGroup key={group.label ?? idx}>
-            {group.label && <SidebarGroupLabel>{group.label}</SidebarGroupLabel>}
+            {group.label && (
+              <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+            )}
             <SidebarGroupContent>
               <SidebarMenu>
                 {group.items.map((item) => {
@@ -118,15 +124,15 @@ export function DashboardSidebar({ role }: DashboardSidebarProps) {
                 >
                   <Avatar className="size-8 rounded-lg">
                     <AvatarFallback className="rounded-lg bg-foodhub-maroon text-white">
-                      MR
+                      {user.name[0]}
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium text-gray-900">
-                      Mahabur Rahman
+                      {user.name}
                     </span>
                     <span className="truncate text-xs text-gray-500">
-                      mahabur@example.com
+                      {user.email}
                     </span>
                   </div>
                   <ChevronUp className="ml-auto size-4 text-gray-400" />
@@ -137,7 +143,7 @@ export function DashboardSidebar({ role }: DashboardSidebarProps) {
                 align="end"
                 className="w-[--radix-dropdown-menu-trigger-width] min-w-56"
               >
-                <DropdownMenuItem className="text-destructive focus:text-destructive">
+                <DropdownMenuItem onClick={() => signOut()} className="text-destructive focus:text-destructive">
                   <LogOut className="size-4" />
                   Log out
                 </DropdownMenuItem>

@@ -1,4 +1,5 @@
-import { CATEGORIES } from "@/data/meals.data";
+import { categories } from "@/data/categories.data";
+
 
 type FilterPanelProps = {
   category: string;
@@ -24,8 +25,8 @@ export default function FilterPanel({
           Category
         </p>
 
-        <div className="flex flex-col gap-1">
-          {CATEGORIES.map((item) => (
+        {/* <div className="flex flex-col gap-1">
+          {categories.map((item) => (
             <button
               key={item}
               type="button"
@@ -39,7 +40,7 @@ export default function FilterPanel({
               {item}
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
 
       <div>

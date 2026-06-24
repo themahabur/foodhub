@@ -1,7 +1,15 @@
 
 import MealsClient from "@/components/modules/meals/MealsClient";
-import { MEALS } from "@/data/meals.data";
+import { meals } from "@/data/meals.data";
+
 
 export default function MealsPage() {
-  return <MealsClient meals={MEALS} />;
+  return (
+    <div>
+      <h1>Meals</h1>
+    </div>
+
+  );
 }
+
+{/* <MealsClient meals={meals} /> */}

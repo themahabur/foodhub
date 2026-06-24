@@ -28,6 +28,9 @@ import { Provider } from "@/types/provider/provider.type";
 import z from "zod";
 import { useForm } from "@tanstack/react-form";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { providerService } from "@/services/provider.service";
+import { useRouter } from "next/navigation";
+import { createProvider } from "@/actions/provider.action";
 
 /* ---------------- TYPES ---------------- */
 
@@ -97,6 +100,7 @@ function SectionHeader({
 export function RestaurantSettingsForm({ provider }: { provider: Props }) {
   const providerData = provider?.data;
   const isEditMode = !!providerData?.id;
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -115,16 +119,21 @@ export function RestaurantSettingsForm({ provider }: { provider: Props }) {
       onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
+      const toastId = toast.loading("Please wait...");
       try {
-        if (isEditMode) {
-          console.log("UPDATE PROVIDER:", value);
-          toast.success("Restaurant updated successfully");
-        } else {
-          console.log("CREATE PROVIDER:", value);
-          toast.success("Restaurant created successfully");
+        const res = await createProvider(value);
+
+        if (res.success === true) {
+          toast.success("Provider created successfully",{ id: toastId });
         }
+
+        if (res.success === false) {
+          toast.error(res.error, { id: toastId });
+        }
+
+        router.push("/dashboard/restaurant");
       } catch (err) {
-        toast.error("Something went wrong");
+        toast.error("Something went wrong", { id: toastId });
       }
     },
   });

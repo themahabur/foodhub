@@ -64,7 +64,7 @@ const RestaurantProfile = ({ provider }: { provider: Props }) => {
             <div className="relative h-52 w-full bg-gradient-to-br from-foodhub-maroon/15 to-amber-100">
               {restaurant.banner ? (
                 <Image
-                  src={""}
+                  src={restaurant.banner}
                   alt={restaurant.businessName}
                   fill
                   className="object-cover"
@@ -89,10 +89,10 @@ const RestaurantProfile = ({ provider }: { provider: Props }) => {
                 </Badge>
               </div>
 
-              <div className="absolute -bottom-10 left-6 flex size-24 items-center justify-center overflow-hidden rounded-2xl border-4 border-background bg-white shadow-lg">
+              <div className="absolute -bottom-10 left-6 flex size-24 items-center justify-center overflow-hidden rounded-2xl border-4 border-background bg-white">
                 {restaurant.logo ? (
                   <Image
-                    src={""}
+                    src={restaurant.logo}
                     alt="logo"
                     width={96}
                     height={96}

@@ -27,9 +27,10 @@ const dashboardLayout = async ({
   }
   const roles = data.user.role;
 
+
   return (
     <SidebarProvider>
-      <DashboardSidebar role={roles} />
+      <DashboardSidebar user={data.user} />
       <SidebarInset className="bg-neutral-50">
         <header className="flex h-14 shrink-0 items-center gap-2 border-b border-foodhub-maroon/10 bg-white/80 backdrop-blur-sm px-4 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
           <SidebarTrigger className="text-neutral-600 hover:bg-foodhub-maroon/5 hover:text-foodhub-maroon transition-colors" />
